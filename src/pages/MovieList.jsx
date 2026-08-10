@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { discoverMovies } from "./../services/movieService"
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useOutlet } from 'react-router-dom';
 import { MoviesContext } from '../contexts/MoviesContext';
+import "./MovieList.css";
 
 const MovieList = () => {
 
     const { movies, setMovies } = useContext(MoviesContext);
+
+    const hasOutlet = useOutlet();
 
     const getDiscMovies = async () => {
         const movies = await discoverMovies();
@@ -21,12 +24,12 @@ const MovieList = () => {
     }
 
     return (
-        <div className='flex items-start justify-between'>
+        <div className='flex items-start justify-between w-full'>
             <Outlet />
-            <section className='grid grid-cols-3 gap-5 p-10 w-5/12 pt-24'>
+            <section className={` grid ${hasOutlet ? "w-5/12 grid-cols-3" : "w-full grid-cols-5"} gap-5 p-10 pt-24`}>
                 {movies.map(movie => (
-                    <Link to={"/movies/" + movie.id}>
-                        <article key={movie.id} className='rounded-lg overflow-hidden hover:border-2 border-[#4e5d709f] transition-all duration-75'>
+                    <Link key={movie.id} to={"/movies/" + movie.id}>
+                        <article className='rounded-lg overflow-hidden hover:border-2 border-[#4e5d709f] transition-all duration-75'>
                             <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} alt={movie.title} />
                             <p className='text-center text-white'>{movie.title}</p>
                         </article>
