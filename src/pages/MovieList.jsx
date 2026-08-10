@@ -21,9 +21,9 @@ const MovieList = () => {
     }
 
     return (
-        <div className='flex gap-8 items-start justify-between'>
+        <div className='flex items-start justify-between'>
             <Outlet />
-            <section className='grid grid-cols-5 gap-5 p-10'>
+            <section className='grid grid-cols-3 gap-5 p-10 w-5/12 pt-24'>
                 {movies.map(movie => (
                     <Link to={"/movies/" + movie.id}>
                         <article key={movie.id} className='rounded-lg overflow-hidden hover:border-2 border-[#4e5d709f] transition-all duration-75'>
