@@ -7,7 +7,9 @@ const Home = () => {
     return (
         <>
             <Header />
-            <Outlet />
+            <div className='container max-w-[1400px] m-auto'>
+                <Outlet />
+            </div>
         </>
     )
 }

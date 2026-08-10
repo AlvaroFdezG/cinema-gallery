@@ -11,8 +11,10 @@ const options = {
 
 const discoverMovies = async () => {
     try {
-        const res = await fetch('https://api.themoviedb.org/3/discover/movie', options);
+        const res = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=es-ES', options);
         const resJson = await res.json();
+        
+        console.log(resJson.results);
         
         return resJson.results;
     } catch (err) {
