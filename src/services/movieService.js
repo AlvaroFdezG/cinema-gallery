@@ -31,4 +31,15 @@ const getMovieCredits = async (id) => {
     }
 }
 
-export { discoverMovies, getMovieCredits }
+const getMovieDetails = async (id) => {
+    try {
+        const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=es-ES`, options);
+        const resJson = await res.json();
+        // console.log(resJson);
+        return resJson;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export { discoverMovies, getMovieCredits, getMovieDetails }
