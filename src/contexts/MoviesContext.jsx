@@ -6,7 +6,7 @@ const MoviesProvider = ({ children }) => {
 
     const [movies, setMovies] = useState();
 
-    const data = { movies, setMovies }
+    const data = { movies, setMovies, genreColors }
 
     return (
         <MoviesContext.Provider value={data}>

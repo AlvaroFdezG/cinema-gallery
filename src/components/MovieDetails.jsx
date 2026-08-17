@@ -10,11 +10,33 @@ const MovieDetails = () => {
     const [movie, setMovie] = useState();
     const [cast, setCast] = useState([]);
 
+    const genreColors = {
+        12: "#f0a8a8",
+        16: "#e4f0a8",
+        35: "#a8f0d8",
+        14: "#a8ccf0",
+        10751: "#e4a8f0",
+        28: "#f0bea8",
+        80: "#f0d5a8",
+        99: "#f0eca8",
+        18: "#c6f0a8",
+        36: "#b0f0a8",
+        27: "#a8f0ce",
+        10402: "#a8f0e4",
+        9648: "#a8e4f0",
+        10749: "#a8b7f0",
+        878: "#b0a8f0",
+        10770: "#c6a8f0",
+        53: "#f0a8ec",
+        10752: "#f0a8d5",
+        37: "#f0a8be",
+    }
+
     useEffect(() => {
         const getMovie = async () => {
             const movieDetails = await getMovieDetails(movieId);
             const movieCast = await getMovieCredits(movieId);
-            console.log(movieDetails);
+            console.log(genreColors);
             setCast(movieCast.cast.slice(0, 10));
             setMovie(movieDetails);
         }
@@ -36,7 +58,8 @@ const MovieDetails = () => {
                         <p className='text-sm text-justify'>{movie.overview}</p>
                         <ul className='flex items-start justify-start gap-2'>
                             {movie.genres.map(genre => (
-                                <li className='border rounded-md border-gray-400 text-gray-400 text-sm p-1' key={genre.id}>{genre.name}</li>
+                                <li style={{ borderColor: genreColors[genre.id], color: genreColors[genre.id] }}
+                                    className={`border rounded-md text-sm p-1`} key={genre.id}>{genre.name}</li>
                             ))}
                         </ul>
                         <section className='flex justify-between items-center'>
