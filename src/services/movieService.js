@@ -13,13 +13,22 @@ const discoverMovies = async () => {
     try {
         const res = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=es-ES', options);
         const resJson = await res.json();
-        
-        console.log(resJson.results);
-        
+        // console.log(resJson.results);
         return resJson.results;
     } catch (err) {
         console.log(err);
     }
 }
 
-export { discoverMovies }
+const getMovieCredits = async (id) => {
+    try {
+        const res = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=es-ES`, options);
+        const resJson = await res.json();
+        // console.log(resJson);
+        return resJson;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export { discoverMovies, getMovieCredits }

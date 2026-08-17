@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { discoverMovies } from "./../services/movieService"
 import { Link, Outlet, useOutlet } from 'react-router-dom';
 import { MoviesContext } from '../contexts/MoviesContext';
-import "./MovieList.css";
 
 const MovieList = () => {
 
@@ -26,7 +25,7 @@ const MovieList = () => {
     return (
         <div className='flex items-start justify-between w-full'>
             <Outlet />
-            <section className={` grid ${hasOutlet ? "w-5/12 grid-cols-3" : "w-full grid-cols-5"} gap-5 p-10 pt-24`}>
+            <section className={`grid ${hasOutlet ? "w-5/12 grid-cols-3" : "w-full grid-cols-5"} gap-5 p-10 pt-24`}>
                 {movies.map(movie => (
                     <Link key={movie.id} to={"/movies/" + movie.id}>
                         <article className='rounded-lg overflow-hidden hover:border-2 border-[#4e5d709f] transition-all duration-75'>
