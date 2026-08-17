@@ -36,7 +36,6 @@ const MovieDetails = () => {
         const getMovie = async () => {
             const movieDetails = await getMovieDetails(movieId);
             const movieCast = await getMovieCredits(movieId);
-            console.log(genreColors);
             setCast(movieCast.cast.slice(0, 10));
             setMovie(movieDetails);
         }
