@@ -2,13 +2,17 @@ import React, { act, useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { MoviesContext } from '../contexts/MoviesContext';
 import { getMovieCredits, getMovieDetails } from '../services/movieService';
+import Modal from './Modal';
+import moment from 'moment';
+import Seats from './Seats';
 
 const MovieDetails = () => {
     const { movieId } = useParams();
 
-    const { movies, setMovies } = useContext(MoviesContext);
+    const { movies, setMovies, showModal, setShowModal } = useContext(MoviesContext);
     const [movie, setMovie] = useState();
     const [cast, setCast] = useState([]);
+
 
     const genreColors = {
         12: "#f0a8a8",
@@ -77,7 +81,7 @@ const MovieDetails = () => {
                             </div>
                         </section>
 
-                        <Link className='absolute top-0 right-0 text-[#89bcff]' to={"/movies"}><i class="fa-solid fa-angles-left"></i></Link>
+                        <Link className='absolute top-0 right-0 text-[#89bcff]' to={"/movies"}><i className="fa-solid fa-angles-left"></i></Link>
                     </section>
                 </div>
                 <section>
@@ -91,8 +95,24 @@ const MovieDetails = () => {
                         ))}
                     </ul>
                 </section>
-                <button className='border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Compra tus entradas</button>
+                <div className='flex items-center justify-between gap-4'>
+                    <Link className='text-center w-full border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Ver detalles</Link>
+                    <button onClick={() => setShowModal(true)} className='w-full border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Compra tus entradas</button>
+                </div>
             </section>
+            {showModal &&
+                <Modal>
+                    <section>
+                        <div className='flex mb-8'>
+                            <h4 className='text-4xl'>{movie.title}</h4>
+                        </div>
+                        <button className='border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>
+                            {moment().format('D-MM-YYYY')}
+                        </button>
+                        <Seats />
+                    </section>
+                </Modal>
+            }
         </div>
 
     )
