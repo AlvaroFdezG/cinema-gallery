@@ -3,7 +3,7 @@ import { MoviesContext } from '../contexts/MoviesContext';
 
 const Modal = ({ children }) => {
 
-  const { showModal, setShowModal } = useContext(MoviesContext);
+  const {setShowModal } = useContext(MoviesContext);
 
   return (
     <div className='p-8 flex justify-center items-center fixed top-0 left-0 w-screen h-screen'>
