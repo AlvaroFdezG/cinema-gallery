@@ -11,7 +11,7 @@ import userDefault from "../assets/userDefault.jpg";
 const MovieDetails = () => {
     const { movieId } = useParams();
 
-    const {showModal, setShowModal } = useContext(MoviesContext);
+    const { showModal, setShowModal } = useContext(MoviesContext);
     const [movie, setMovie] = useState();
     const [cast, setCast] = useState([]);
 
@@ -22,6 +22,9 @@ const MovieDetails = () => {
             console.log(movieCast);
             setCast(movieCast.cast.slice(0, 10));
             setMovie(movieDetails);
+
+            console.log(movieCast);
+            
         }
         getMovie();
     }, [movieId])
@@ -62,19 +65,25 @@ const MovieDetails = () => {
                         </section>
 
                         <Link className='absolute top-0 right-0 text-[#89bcff]' to={"/movies"}><i className="fa-solid fa-angles-left"></i></Link>
-                    </section>
-                </div>
-                <section>
-                    <h4 className='text-gray-400 mb-3'>ELENCO</h4>
-                    <ul className='grid grid-cols-10 gap-4'>
-                        {cast.map(actor => (
+                        <section>
+
+                            <h4 className='text-gray-400'>Reparto</h4>
+                            {
+                                cast.map(actor => (
+                                    <span className='text-center text-sm' key={actor.cast_id}>
+                                        {actor.name}{actor.order < 9 ? ", " : "."}
+                                    </span>
+                                ))}
+
+                            {/* {cast.map(actor => (
                             <li key={actor.cast_id}>
                                 <img className='rounded-xl' src={actor.profile_path ? "https://image.tmdb.org/t/p/original" + actor.profile_path : userDefault} alt={actor.name} />
                                 <p className='text-center text-sm'>{actor.name}</p>
                             </li>
-                        ))}
-                    </ul>
-                </section>
+                        ))} */}
+                        </section>
+                    </section>
+                </div>
                 <div className='flex items-center justify-between gap-4'>
                     <Link className='text-center w-full border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Ver detalles</Link>
                     <button onClick={() => setShowModal(true)} className='w-full border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Compra tus entradas</button>
