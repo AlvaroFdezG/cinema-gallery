@@ -3,10 +3,10 @@ import { Link, useParams } from 'react-router-dom'
 import { MoviesContext } from '../contexts/MoviesContext';
 import { getMovieCredits, getMovieDetails } from '../services/movieService';
 import Modal from './Modal';
-import moment from 'moment';
 import Seats from './Seats';
-import { genreColors } from '../assets/colors';
+import { genreColors } from '../assets/utils';
 import userDefault from "../assets/userDefault.jpg";
+import DaysSessions from './DaysSessions';
 
 const MovieDetails = () => {
     const { movieId } = useParams();
@@ -20,11 +20,11 @@ const MovieDetails = () => {
             const movieDetails = await getMovieDetails(movieId);
             const movieCast = await getMovieCredits(movieId);
             console.log(movieCast);
-            setCast(movieCast.cast.slice(0, 10));
+            setCast(movieCast);
             setMovie(movieDetails);
 
             console.log(movieCast);
-            
+
         }
         getMovie();
     }, [movieId])
@@ -36,7 +36,7 @@ const MovieDetails = () => {
     }
     return (
         <div className='sticky top-0 left-0 h-screen pt-24 pb-8 w-7/12'>
-            <section className='rounded-lg p-6 bg-[#313a46] border-2 border-[#4e5d709f] flex flex-col gap-5 text-white h-full'>
+            <section className='rounded-lg p-6 bg-[#313a46] border-2 border-[#4e5d709f] flex flex-col gap-5 text-white h-full overflow-scroll'>
                 <div className='flex items-start justify-between gap-5'>
                     <img className='w-4/12' src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} alt={movie.title} />
                     <section className='w-8/12 flex flex-col gap-4 relative'>
@@ -66,10 +66,11 @@ const MovieDetails = () => {
 
                         <Link className='absolute top-0 right-0 text-[#89bcff]' to={"/movies"}><i className="fa-solid fa-angles-left"></i></Link>
                         <section>
-
+                            <h4 className='text-gray-400'>Director</h4>
+                            <p className='text-sm'>{cast.crew[0].name}</p>
                             <h4 className='text-gray-400'>Reparto</h4>
                             {
-                                cast.map(actor => (
+                                cast.cast.slice(0, 10).map(actor => (
                                     <span className='text-center text-sm' key={actor.cast_id}>
                                         {actor.name}{actor.order < 9 ? ", " : "."}
                                     </span>
@@ -85,23 +86,10 @@ const MovieDetails = () => {
                     </section>
                 </div>
                 <div className='flex items-center justify-between gap-4'>
-                    <Link className='text-center w-full border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Ver detalles</Link>
-                    <button onClick={() => setShowModal(true)} className='w-full border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Compra tus entradas</button>
+                    <Link className='text-center w-full border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Mas detalles</Link>
                 </div>
+                <DaysSessions />
             </section>
-            {showModal &&
-                <Modal>
-                    <section>
-                        <div className='flex mb-8'>
-                            <h4 className='text-4xl'>{movie.title}</h4>
-                        </div>
-                        <button className='border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>
-                            {moment().format('D-MM-YYYY')}
-                        </button>
-                        <Seats />
-                    </section>
-                </Modal>
-            }
         </div>
 
     )
