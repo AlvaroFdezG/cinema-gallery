@@ -2,8 +2,6 @@ import React, { act, useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { MoviesContext } from '../contexts/MoviesContext';
 import { getMovieCredits, getMovieDetails } from '../services/movieService';
-import Modal from './Modal';
-import Seats from './Seats';
 import { genreColors } from '../assets/utils';
 import userDefault from "../assets/userDefault.jpg";
 import DaysSessions from './DaysSessions';
@@ -86,7 +84,7 @@ const MovieDetails = () => {
                     </section>
                 </div>
                 <div className='flex items-center justify-between gap-4'>
-                    <Link className='text-center w-full border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Mas detalles</Link>
+                    <Link className='text-center w-full border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Mas detalles <i class="fa-solid fa-caret-right"></i></Link>
                 </div>
                 <DaysSessions />
             </section>
