@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import MovieList from './pages/MovieList'
 import MovieDetails from './components/MovieDetails'
 import MoviesProvider from './contexts/MoviesContext'
+import MovieData from './pages/MovieData'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
               <Route path='/movies' element={<MovieList />} >
                 <Route path='/movies/:movieId' element={<MovieDetails />} />
               </Route>
+              <Route path='/moviedata/:movieId' element={<MovieData />}/>
             </Route>
           </Routes>
         </MoviesProvider>

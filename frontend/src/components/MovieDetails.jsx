@@ -4,29 +4,26 @@ import { getMovieCredits, getMovieDetails } from '../services/movieService';
 import { genreColors } from '../assets/utils';
 import userDefault from "../assets/userDefault.jpg";
 import DaysSessions from './DaysSessions';
+import { MoviesContext } from '../contexts/MoviesContext';
 
 const MovieDetails = () => {
     const { movieId } = useParams();
-
-    const [movie, setMovie] = useState();
-    const [cast, setCast] = useState([]);
+    const { movie, setMovie, cast, setCast } = useContext(MoviesContext);
     const [sessions, setSessions] = useState([]);
 
+    const getMovie = async () => {
+        const movieDetails = await getMovieDetails(movieId);
+        const movieCast = await getMovieCredits(movieId);
+        setCast(movieCast);
+        setMovie(movieDetails);
+    }
 
     useEffect(() => {
-        const getMovie = async () => {
-            const movieDetails = await getMovieDetails(movieId);
-            const movieCast = await getMovieCredits(movieId);
-            setCast(movieCast);
-            setMovie(movieDetails);
-        }
         getMovie();
-    }, [movieId])
+    }, [movieId]);
 
     if (!movie) {
-        return (
-            <p>Loading movie</p>
-        )
+        return (<p>Loading movie</p>);
     }
     return (
         <div className='sticky top-0 left-0 h-screen pt-24 pb-8 w-7/12'>
@@ -34,7 +31,7 @@ const MovieDetails = () => {
                 <div className='flex items-start justify-between gap-5'>
                     <div className='w-4/12'>
                         <img className='w-full' src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} alt={movie.title} />
-                        <Link className='mt-2 block w-full text-center border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Mas detalles <i className="fa-solid fa-caret-right"></i></Link>
+                        <Link to={"/movieData/" + movie.id} className='mt-2 block w-full text-center border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Mas detalles <i className="fa-solid fa-caret-right"></i></Link>
                     </div>
 
                     <section className='w-8/12 flex flex-col gap-4 relative'>
@@ -73,16 +70,8 @@ const MovieDetails = () => {
                                             {actor.name}{actor.order < 9 ? ", " : "."}
                                         </span>
                                     ))}
-
-                                {/* {cast.map(actor => (
-                            <li key={actor.cast_id}>
-                                <img className='rounded-xl' src={actor.profile_path ? "https://image.tmdb.org/t/p/original" + actor.profile_path : userDefault} alt={actor.name} />
-                                <p className='text-center text-sm'>{actor.name}</p>
-                            </li>
-                        ))} */}
                             </section>
                         </section>
-
                     </section>
                 </div>
                 <DaysSessions movie={movie} sessions={sessions} setSessions={setSessions} />
