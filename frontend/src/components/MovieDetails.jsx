@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { MoviesContext } from '../contexts/MoviesContext';
 import { getMovieCredits, getMovieDetails } from '../services/movieService';
 import { genreColors } from '../assets/utils';
 import userDefault from "../assets/userDefault.jpg";
@@ -9,7 +8,6 @@ import DaysSessions from './DaysSessions';
 const MovieDetails = () => {
     const { movieId } = useParams();
 
-    const { showModal, setShowModal } = useContext(MoviesContext);
     const [movie, setMovie] = useState();
     const [cast, setCast] = useState([]);
     const [sessions, setSessions] = useState([]);
@@ -87,7 +85,7 @@ const MovieDetails = () => {
 
                     </section>
                 </div>
-                <DaysSessions sessions={sessions} setSessions={setSessions} />
+                <DaysSessions movie={movie} sessions={sessions} setSessions={setSessions} />
             </section>
         </div>
 

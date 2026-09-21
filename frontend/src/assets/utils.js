@@ -24,37 +24,44 @@ const sessionsTest = [
     {
         "day": "20/09/2026",
         "hour": "10:00",
-        "room": 3
+        "room": 3,
+        "info": "DIGITAL"
     },
     {
         "day": "20/09/2026",
         "hour": "12:00",
-        "room": 3
+        "room": 3,
+        "info": "DIGITAL"
     },
     {
         "day": "20/09/2026",
         "hour": "14:00",
-        "room": 6
+        "room": 6,
+        "info": "ATMOS"
     },
     {
         "day": "20/09/2026",
         "hour": "16:00",
-        "room": 2
+        "room": 2,
+        "info": "ATMOS"
     },
     {
         "day": "20/09/2026",
         "hour": "18:00",
-        "room": 2
+        "room": 2,
+        "info": "IMAX"
     },
     {
         "day": "20/09/2026",
         "hour": "20:00",
-        "room": 1
+        "room": 1,
+        "info": "3D"
     },
     {
         "day": "20/09/2026",
         "hour": "22:00",
-        "room": 1
+        "room": 1,
+        "info": "IMAX"
     }
 ]
 
