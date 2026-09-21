@@ -20,4 +20,38 @@ const genreColors = {
     37: "#f0a8be",
 }
 
-export {genreColors}
+const sessionsTest = [
+    {
+        "day": "20/09/2026",
+        "hour": "10:00"
+    },
+    {
+        "day": "20/09/2026",
+        "hour": "12:00"
+    },
+    {
+        "day": "20/09/2026",
+        "hour": "14:00"
+    },
+    {
+        "day": "20/09/2026",
+        "hour": "16:00"
+    },
+    {
+        "day": "20/09/2026",
+        "hour": "18:00"
+    },
+    {
+        "day": "20/09/2026",
+        "hour": "20:00"
+    },
+    {
+        "day": "20/09/2026",
+        "hour": "22:00"
+    }
+]
+
+export {
+    genreColors,
+    sessionsTest
+}

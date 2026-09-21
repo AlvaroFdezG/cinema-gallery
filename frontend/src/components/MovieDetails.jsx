@@ -1,4 +1,4 @@
-import React, { act, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { MoviesContext } from '../contexts/MoviesContext';
 import { getMovieCredits, getMovieDetails } from '../services/movieService';
@@ -9,20 +9,20 @@ import DaysSessions from './DaysSessions';
 const MovieDetails = () => {
     const { movieId } = useParams();
 
-    const { showModal, setShowModal } = useContext(MoviesContext);
+    const { showModal, setShowModal, showDays, setShowDays } = useContext(MoviesContext);
     const [movie, setMovie] = useState();
     const [cast, setCast] = useState([]);
+
+    const [daySelected, setDaySelected] = useState();
+    const [sessions, setSessions] = useState([]);
+
 
     useEffect(() => {
         const getMovie = async () => {
             const movieDetails = await getMovieDetails(movieId);
             const movieCast = await getMovieCredits(movieId);
-            console.log(movieCast);
             setCast(movieCast);
             setMovie(movieDetails);
-
-            console.log(movieCast);
-
         }
         getMovie();
     }, [movieId])
@@ -48,7 +48,7 @@ const MovieDetails = () => {
                         </ul>
                         <section className='flex justify-between items-center'>
                             <div>
-                                <p><i class="fa-solid fa-star"></i> {movie.vote_average.toFixed(1)}/10</p>
+                                <p><i className="fa-solid fa-star"></i> {movie.vote_average.toFixed(1)}/10</p>
                                 <span className='text-gray-400'>{movie.vote_count} votos</span>
                             </div>
 
@@ -84,9 +84,9 @@ const MovieDetails = () => {
                     </section>
                 </div>
                 <div className='flex items-center justify-between gap-4'>
-                    <Link className='text-center w-full border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Mas detalles <i class="fa-solid fa-caret-right"></i></Link>
+                    <Link className='text-center w-full border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Mas detalles <i className="fa-solid fa-caret-right"></i></Link>
                 </div>
-                <DaysSessions />
+                <DaysSessions daySelected={daySelected} setDaySelected={setDaySelected} sessions={sessions} setSessions={setSessions} />
             </section>
         </div>
 

@@ -6,8 +6,9 @@ const MoviesProvider = ({ children }) => {
 
     const [movies, setMovies] = useState();
     const [showModal, setShowModal] = useState(false);
+    const [showDays, setShowDays] = useState(false);
 
-    const data = { movies, setMovies, showModal, setShowModal }
+    const data = { movies, setMovies, showModal, setShowModal, showDays, setShowDays }
 
     return (
         <MoviesContext.Provider value={data}>

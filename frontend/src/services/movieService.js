@@ -1,4 +1,5 @@
 const API_KEY = import.meta.env.VITE_API_KEY;
+import { sessionsTest } from "./../assets/utils.js";
 
 const options = {
     method: 'GET',
@@ -42,4 +43,15 @@ const getMovieDetails = async (id) => {
     }
 }
 
-export { discoverMovies, getMovieCredits, getMovieDetails }
+const getSessionsByDay = () => {
+    console.log(sessionsTest);
+    const sessions = sessionsTest;
+    return sessions;
+}
+
+export {
+    discoverMovies,
+    getMovieCredits,
+    getMovieDetails,
+    getSessionsByDay
+}
