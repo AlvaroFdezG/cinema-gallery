@@ -10,6 +10,14 @@ Seat.init(
             primaryKey: true,
             autoIncrement: true
         },
+        number: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        row: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         id_room: {
             type: DataTypes.INTEGER,
             allowNull: false

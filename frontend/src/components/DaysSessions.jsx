@@ -83,9 +83,9 @@ const DaysSessions = ({ sessions, setSessions, movie }) => {
             }
             {showModal &&
                 <Modal>
-                    <div className="flex gap-8">
-                        <section className="flex flex-col items-start gap-8">
-                            <h3 className="text-5xl">{movie.title}</h3>
+                    <h3 className="text-5xl">{movie.title}</h3>
+                    <div className="h-full flex gap-8 justify-between">
+                        <section className="flex flex-col items-start gap-8 w-2/5">
                             <div>
                                 <p className='text-gray-400'>SESIÓN</p>
                                 <p className="font-semibold">{daySelected}, {sessionSelected.hour}</p>
@@ -95,7 +95,9 @@ const DaysSessions = ({ sessions, setSessions, movie }) => {
                                 <p className="font-semibold">{sessionSelected.room} ({sessionSelected.info})</p>
                             </div>
                         </section>
-                        <Seats />
+                        <section className="w-3/5 overflow-scroll">
+                            <Seats />
+                        </section>
                     </div>
                 </Modal>
             }
