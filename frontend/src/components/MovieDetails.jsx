@@ -31,7 +31,9 @@ const MovieDetails = () => {
                 <div className='flex items-start justify-between gap-5'>
                     <div className='w-4/12'>
                         <img className='w-full' src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} alt={movie.title} />
-                        <Link to={"/movieData/" + movie.id} className='mt-2 block w-full text-center border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Mas detalles <i className="fa-solid fa-caret-right"></i></Link>
+                        <Link to={"/movieData/" + movie.id} className='mt-2 block w-full text-center border rounded-md border-gray-400 p-2 font-semibold text-[#89bcff]'>Mas detalles
+                            <i className="fa-solid fa-caret-right"></i>
+                        </Link>
                     </div>
 
                     <section className='w-8/12 flex flex-col gap-4 relative'>

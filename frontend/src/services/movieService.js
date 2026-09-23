@@ -43,15 +43,28 @@ const getMovieDetails = async (id) => {
     }
 }
 
+const getSeats = async (id) => {
+    try {
+        const res = await fetch("http://localhost:3000/api/v1/seats");
+        const resJson = await res.json();
+        console.log(resJson);
+        return resJson;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 const getSessionsByDay = () => {
     console.log(sessionsTest);
     const sessions = sessionsTest;
     return sessions;
 }
 
+
 export {
     discoverMovies,
     getMovieCredits,
     getMovieDetails,
-    getSessionsByDay
+    getSessionsByDay,
+    getSeats
 }
